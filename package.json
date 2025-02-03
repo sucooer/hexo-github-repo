@@ -1,6 +1,6 @@
 {
   "name": "@sucooer/hexo-github-repo-card",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "在 Hexo 文章中展示 GitHub 仓库信息卡片",
   "main": "index.js",
   "keywords": [
