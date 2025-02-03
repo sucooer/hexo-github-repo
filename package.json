@@ -1,32 +1,25 @@
 {
-  "name": "@sucooer/hexo-github-repo-card",
-  "version": "1.0.7",
-  "description": "在 Hexo 文章中展示 GitHub 仓库信息卡片",
-  "keywords": [
-    "hexo",
-    "github",
-    "plugin"
-  ],
-  "homepage": "https://github.com/sucooer/hexo-github-repo-card#readme",
-  "bugs": {
-    "url": "https://github.com/sucooer/hexo-github-repo-card/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sucooer/hexo-github-repo-card.git"
-  },
-  "license": "MIT",
-  "author": "sucooer",
-  "type": "commonjs",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "node-fetch": "^2.6.1"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  }
+    "name": "hexo-github-repo-card-plus",
+    "version": "1.0.6",
+    "description": "A Hexo plugin to display GitHub repository cards",
+    "main": "index.js",
+    "keywords": [
+        "hexo",
+        "github",
+        "repository",
+        "card",
+        "plugin"
+    ],
+    "author": "sucooer",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sucooer/hexo-github-repo-card.git"
+    },
+    "dependencies": {
+        "node-fetch": "^2.6.7"
+    },
+    "engines": {
+        "node": ">=12.0.0"
+    }
 }
