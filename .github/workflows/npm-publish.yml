@@ -14,8 +14,8 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org/'
       
-      # 安装依赖
-      - run: npm ci
+      # 使用 npm install 替代 npm ci
+      - run: npm install
       
       # 运行测试（如果有的话）
       # - run: npm test
