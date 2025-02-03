@@ -20,13 +20,14 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org/'
-          # 确保使用 npm 注册表
-          scope: '@sucooer'
       
-      # 配置 npm
-      - run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTOMATION_TOKEN }}" > ~/.npmrc
-          npm config set access public
+      # 登录到 npm
+      - name: NPM Login
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTOMATION_TOKEN }}" >> ~/.npmrc
+          npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
       
       # 安装依赖
       - run: npm install
@@ -35,10 +36,10 @@ jobs:
       # - run: npm test
       
       # 发布到 npm
-      - run: npm publish --access public
+      - name: Publish to NPM
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
 
   # 添加构建测试任务
   build-test:
