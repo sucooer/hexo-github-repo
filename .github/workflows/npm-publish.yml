@@ -9,18 +9,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org/'
+          # 确保使用 npm 注册表
+          scope: '@sucooer'
       
-      # 使用 npm install 替代 npm ci
+      # 配置 npm
+      - run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTOMATION_TOKEN }}" > ~/.npmrc
+          npm config set access public
+      
+      # 安装依赖
       - run: npm install
       
       # 运行测试（如果有的话）
       # - run: npm test
       
       # 发布到 npm
-      - run: npm publish
+      - run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}} 
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }} 

@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/sucooer/hexo-github-repo-card/issues"
   },
-  "homepage": "https://github.com/sucooer/hexo-github-repo-card#readme"
-} 
+  "homepage": "https://github.com/sucooer/hexo-github-repo-card#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
