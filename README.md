@@ -16,7 +16,7 @@
 
 ## 📦 安装
 ```bash
-npm install hexo-github-repo-card --save
+npm install @sucooer/hexo-github-repo-card --save
 ```
 
 ## 🚀 使用方法
