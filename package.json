@@ -10,16 +10,32 @@
         "card",
         "plugin"
     ],
+    "scripts": {
+        "test": "echo \"No tests specified\" && exit 0",
+        "lint": "echo \"No linting configured\" && exit 0",
+        "prepublishOnly": "echo \"Preparing for publish...\"",
+        "postpublish": "echo \"Published successfully!\""
+    },
     "author": "sucooer",
     "license": "MIT",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/sucooer/hexo-github-repo-card.git"
     },
+    "bugs": {
+        "url": "https://github.com/sucooer/hexo-github-repo-card/issues"
+    },
+    "homepage": "https://github.com/sucooer/hexo-github-repo-card#readme",
     "dependencies": {
         "node-fetch": "^2.6.7"
     },
     "engines": {
         "node": ">=12.0.0"
-    }
+    },
+    "files": [
+        "index.js",
+        "assets/",
+        "README.md",
+        "LICENSE"
+    ]
 }
