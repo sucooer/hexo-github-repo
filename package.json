@@ -1,6 +1,6 @@
 {
     "name": "hexo-github-repo-card-plus",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "A Hexo plugin to display GitHub repository cards",
     "main": "index.js",
     "keywords": [
