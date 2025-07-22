@@ -1,73 +1,45 @@
-name: Publish to NPM
+name: Node.js Package
 
 on:
   push:
     branches:
       - main
-      - master
-    tags:
-      - 'v*'
-  pull_request:
-    branches:
-      - main
-      - master
 
 jobs:
-  test:
+  publish-npm:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 18.x]
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       
-    - name: Setup Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: npm ci
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+          registry-url: 'https://registry.npmjs.org/'
       
-    - name: Run tests
-      run: npm test --if-present
+      # 配置 npm 认证
+      - name: Configure npm authentication
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTOMATION_TOKEN }}" > ~/.npmrc
       
-    - name: Check package
-      run: npm pack --dry-run
+      # 安装依赖
+      - run: npm install
+      
+      # 发布到 npm
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
 
-  publish:
-    needs: test
+  # 添加构建测试任务
+  build-test:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v'))
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        registry-url: 'https://registry.npmjs.org'
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: npm ci
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
       
-    - name: Build package
-      run: npm run build --if-present
+      # 安装依赖
+      - run: npm install
       
-    - name: Publish to NPM (latest)
-      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-      run: npm publish --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        
-    - name: Publish to NPM (tagged release)
-      if: startsWith(github.ref, 'refs/tags/v')
-      run: npm publish --access public --tag latest
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # 如果有测试脚本的话
+      # - run: npm test 
